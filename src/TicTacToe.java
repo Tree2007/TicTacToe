@@ -74,12 +74,13 @@ public class TicTacToe {
 
     private static boolean isColWin(String player){
         boolean colWin = false;
-        for (int c = 0; c < board[0].length; c++) {
-            for (int r = 0; r < board.length; r++) {
-
-            }
-
-    }
+        if (board[0][0].equalsIgnoreCase(board[0][1]) && board[0][0].equalsIgnoreCase(board[0][2])) {
+            colWin = true;
+        } else if (board[1][0].equalsIgnoreCase(board[1][1]) && board[1][0].equalsIgnoreCase(board[1][2])){
+            colWin = true;
+        } else if (board[2][0].equalsIgnoreCase(board[2][1]) && board[2][0].equalsIgnoreCase(board[2][2])){
+            colWin = true;
+        }
         return colWin;
     }
 
