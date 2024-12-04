@@ -74,12 +74,14 @@ public class TicTacToe {
 
     private static boolean isColWin(String player){
         boolean colWin = false;
-        if (board[0][0].equalsIgnoreCase(board[0][1]) && board[0][0].equalsIgnoreCase(board[0][2])) {
-            colWin = true;
-        } else if (board[1][0].equalsIgnoreCase(board[1][1]) && board[1][0].equalsIgnoreCase(board[1][2])){
-            colWin = true;
-        } else if (board[2][0].equalsIgnoreCase(board[2][1]) && board[2][0].equalsIgnoreCase(board[2][2])){
-            colWin = true;
+        for (int c = 0; c < board[0].length; c++) {
+            for (int r = 0; r < board.length; r++) {
+                if (board[r][c].equalsIgnoreCase(player)) {
+                    colWin = true;
+                } else {
+                    break;
+                }
+            }
         }
         return colWin;
     }
@@ -88,7 +90,15 @@ public class TicTacToe {
 
     private static boolean isRowWin(String player){
         boolean rowWin = false;
-
+        for (int r = 0; r < board.length; r++) {
+            for (int c = 0; c < board[0].length; c++) {
+                if (board[r][c].equalsIgnoreCase(player)) {
+                    rowWin = true;
+                } else {
+                    break;
+                }
+            }
+        }
         return rowWin;
     }
 
@@ -96,7 +106,15 @@ public class TicTacToe {
 
     private static boolean isDiagonalWin(String player){
         boolean diagWin = false;
-
+        for (int r = 0; r < board.length; r++) {
+            for (int c = 0; c < board[0].length; c++) {
+                if (board[r][c].equalsIgnoreCase(player)) {
+                    diagWin = true;
+                } else {
+                    break;
+                }
+            }
+        }
         return diagWin;
     }
 
@@ -104,7 +122,11 @@ public class TicTacToe {
 
     private static boolean isTie(){
         boolean tie = false;
+        for (int r = 0; r < board.length; r++) {
+            for (int c = 0; c < board[0].length; c++) {
 
+            }
+        }
         return tie;
     }
 
