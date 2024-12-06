@@ -11,16 +11,42 @@ public class TicTacToe {
 
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
+        boolean win = false;
         boolean validMove = false;
+        int r;
+        int c;
+        String playerOne = "X";
+        String playerTwo = "O";
         System.out.println("Welcome to Tic Tac Toe!");
         clearBoard();
         displayBoard();
         do {
-            int r = InputHelper.getRangedInt(scan, "Please move your row:", 1, 3);
-            int c = InputHelper.getRangedInt(scan, "Please move your col:", 1, 3);
-            validMove = isValidMove(r, c);
-        } while (!validMove);
-
+            do {
+                r = InputHelper.getRangedInt(scan, "Please move your row:", 1, 3);
+                c = InputHelper.getRangedInt(scan, "Please move your col:", 1, 3);
+                validMove = isValidMove(r, c);
+            } while (!validMove);
+            board[r - 1][c - 1] = playerOne;
+            displayBoard();
+            if (isWin(playerOne)) {
+                System.out.println("You won!");
+            } else if (isTie()) {
+                System.out.println("You tied");
+            } else {
+                do {
+                    r = InputHelper.getRangedInt(scan, "Player two, move your row:", 1, 3);
+                    c = InputHelper.getRangedInt(scan, "Player two, move your row:", 1, 3);
+                    validMove = isValidMove(r, c);
+                } while (!validMove);
+                board[r - 1][c - 1] = playerTwo;
+                displayBoard();
+                if (isWin(playerTwo)) {
+                    System.out.println("You won!");
+                } else if (isTie()) {
+                    System.out.println("You tied");
+                }
+            }
+        }while(!win);
     }
 
 
@@ -52,11 +78,10 @@ public class TicTacToe {
 
     private static boolean isValidMove(int r, int c) {
        boolean validMove = false;
-       if (board[r][c].equalsIgnoreCase("-")) {
+       if (board[r][c].equals("-")) {
             validMove = true;
        }else
            System.out.println("You can not make that move");
-
        return validMove;
     }
 
@@ -79,8 +104,12 @@ public class TicTacToe {
                 if (board[r][c].equalsIgnoreCase(player)) {
                     colWin = true;
                 } else {
+                    colWin = false;
                     break;
                 }
+            }
+            if (colWin) {
+                break;
             }
         }
         return colWin;
@@ -91,13 +120,14 @@ public class TicTacToe {
     private static boolean isRowWin(String player){
         boolean rowWin = false;
         for (int r = 0; r < board.length; r++) {
-            for (int c = 0; c < board[0].length; c++) {
-                if (board[r][c].equalsIgnoreCase(player)) {
+
+                if (board[r][0].equalsIgnoreCase(player) && board[r][1].equalsIgnoreCase(player) && board[r][2].equalsIgnoreCase(player)) {
                     rowWin = true;
-                } else {
+                }
+                else {
                     break;
                 }
-            }
+
         }
         return rowWin;
     }
@@ -107,7 +137,7 @@ public class TicTacToe {
     private static boolean isDiagonalWin(String player){
         boolean diagWin = false;
         for (int r = 0; r < board.length; r++) {
-            for (int c = 0; c < board[0].length; c++) {
+            for (int c = 1; c < board[0].length; c++) {
                 if (board[r][c].equalsIgnoreCase(player)) {
                     diagWin = true;
                 } else {
