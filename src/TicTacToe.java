@@ -77,12 +77,12 @@ public class TicTacToe {
     //Checks for valid move
 
     private static boolean isValidMove(int r, int c) {
-       boolean validMove = false;
-       if (board[r][c].equals("-")) {
-            validMove = true;
-       }else
+       if (board[r - 1][c - 1].equalsIgnoreCase("-")) {
+            return true;
+       } else {
            System.out.println("You can not make that move");
-       return validMove;
+           return false;
+       }
     }
 
     //checks for winning moves
@@ -100,14 +100,13 @@ public class TicTacToe {
     private static boolean isColWin(String player){
         boolean colWin = false;
         for (int c = 0; c < board[0].length; c++) {
-            for (int r = 0; r < board.length; r++) {
-                if (board[r][c].equalsIgnoreCase(player)) {
+                if (board[0][c].equalsIgnoreCase(player) && board[1][c].equalsIgnoreCase(player) && board[2][c].equalsIgnoreCase(player)) {
                     colWin = true;
                 } else {
                     colWin = false;
                     break;
                 }
-            }
+
             if (colWin) {
                 break;
             }
@@ -136,14 +135,10 @@ public class TicTacToe {
 
     private static boolean isDiagonalWin(String player){
         boolean diagWin = false;
+        int c = 0;
+
         for (int r = 0; r < board.length; r++) {
-            for (int c = 1; c < board[0].length; c++) {
-                if (board[r][c].equalsIgnoreCase(player)) {
-                    diagWin = true;
-                } else {
-                    break;
-                }
-            }
+
         }
         return diagWin;
     }
@@ -154,7 +149,11 @@ public class TicTacToe {
         boolean tie = false;
         for (int r = 0; r < board.length; r++) {
             for (int c = 0; c < board[0].length; c++) {
-
+            if (board[r][c].equalsIgnoreCase("-")){
+                tie = false;
+            } else {
+                tie = true;
+            }
             }
         }
         return tie;
